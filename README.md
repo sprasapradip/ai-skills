@@ -97,4 +97,4 @@ No license file has been added yet, so all rights are reserved by the author unt
 
 ## Author
 
-**Pradip Subedi** ([@sprasapradip](https://github.com/sprasapradip)), electrical engineer and PHP/Laravel and WordPress developer from Nepal.
+**Pradip Subedi** ([@sprasapradip](https://github.com/sprasapradip)), electrical engineering student and PHP/Laravel and WordPress developer from Nepal.
