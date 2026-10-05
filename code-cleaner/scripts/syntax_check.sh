@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+# Author: Pradip Subedi (@sprasapradip) - https://github.com/sprasapradip/ai-skills
 # Syntax-check files with the language's own toolchain when it is installed.
 # Python is always available (py_compile); php -l, node --check and tsc --noEmit
 # are used when present and skipped with a notice otherwise.

@@ -9,6 +9,8 @@ Usage:
     validate_svg.py CARD.svg [--size og|github|square|WxH] [--json]
 
 Exit codes: 0 = pass, 1 = fail, 2 = usage / IO error.
+
+Author: Pradip Subedi (@sprasapradip) - https://github.com/sprasapradip/ai-skills
 """
 from __future__ import annotations
 

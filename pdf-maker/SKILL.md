@@ -10,6 +10,8 @@ description: >-
   document", or "turn these notes into a PDF".
 version: 2.0.0
 tier: premium
+author: Pradip Subedi (@sprasapradip)
+homepage: https://github.com/sprasapradip/ai-skills
 ---
 
 # PDF Maker (Premium)

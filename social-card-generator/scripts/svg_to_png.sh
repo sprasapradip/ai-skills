@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+# Author: Pradip Subedi (@sprasapradip) - https://github.com/sprasapradip/ai-skills
 # Rasterize an SVG card to PNG with whatever renderer is installed
 # (rsvg-convert > inkscape > chrome-headless-shell > Chrome/Chromium), then
 # verify the PNG signature, pixel dimensions and size budget.

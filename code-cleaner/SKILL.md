@@ -11,6 +11,8 @@ description: >-
   "make this PSR-12 / PEP 8 compliant", or "review and improve this function".
 version: 2.0.0
 tier: premium
+author: Pradip Subedi (@sprasapradip)
+homepage: https://github.com/sprasapradip/ai-skills
 ---
 
 # Code Cleaner (Premium)

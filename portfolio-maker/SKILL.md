@@ -9,6 +9,8 @@ description: >-
   "make a portfolio page from my resume/CV", "personal website", "resume website", or "showcase my projects".
 version: 2.0.0
 tier: premium
+author: Pradip Subedi (@sprasapradip)
+homepage: https://github.com/sprasapradip/ai-skills
 ---
 
 # Portfolio Maker (Premium)

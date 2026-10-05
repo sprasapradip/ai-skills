@@ -1,0 +1,3 @@
+We are hiring a Senior Laravel Developer. You will build REST APIs with Laravel and MySQL, run Redis queues,
+write PHPUnit tests and deploy with Docker and GitHub Actions. Experience with Vue and payment integrations is a plus.
+Laravel experience of 5+ years required. Strong MySQL and Redis skills. Docker in production.

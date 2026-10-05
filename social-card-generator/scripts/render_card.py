@@ -12,6 +12,8 @@ Usage:
                    [--size og|github|square] [--config card.json] -o card.svg [--strict]
 
 Exit codes: 0 = written, 1 = quality gate failed (contrast / truncation under --strict), 2 = usage error.
+
+Author: Pradip Subedi (@sprasapradip) - https://github.com/sprasapradip/ai-skills
 """
 from __future__ import annotations
 

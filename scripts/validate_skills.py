@@ -19,7 +19,7 @@ import sys
 from pathlib import Path
 from typing import Dict, List
 
-REQUIRED_KEYS = ("name", "description", "version", "tier")
+REQUIRED_KEYS = ("name", "description", "version", "tier", "author")
 REQUIRED_SECTIONS = (
     "System Role & Objective",
     "Mode Selection",
@@ -29,7 +29,11 @@ REQUIRED_SECTIONS = (
     "Negative Constraints",
     "Production Checklist",
 )
-SHARED_FILES = [("landing-page-builder/scripts/audit_html.py", "portfolio-maker/scripts/audit_html.py")]
+SHARED_FILES = [
+    ("landing-page-builder/scripts/audit_html.py", "portfolio-maker/scripts/audit_html.py"),
+    ("text-humanizer/scripts/ai_tells.py", "seo-blog-writer/scripts/ai_tells.py"),
+]
+AUTHOR = "sprasapradip"
 SEMVER = re.compile(r"^\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?$")
 
 
@@ -84,7 +88,9 @@ def check_skill(skill_dir: Path) -> List[str]:
         if not any(section.lower() in h.lower() for h in headings):
             problems.append(f"missing section '{section}'")
 
-    referenced = set(re.findall(r"scripts/([\w.-]+\.(?:py|sh))", text))
+    if AUTHOR not in fm.get("author", ""):
+        problems.append(f"frontmatter author must credit @{AUTHOR}")
+    referenced = set(re.findall(r"(?<![\w/.-])scripts/([\w.-]+\.(?:py|sh))", text))
     scripts_dir = skill_dir / "scripts"
     shipped = {p.name for p in scripts_dir.glob("*") if p.suffix in (".py", ".sh")} if scripts_dir.is_dir() else set()
     for missing in sorted(referenced - shipped):
@@ -96,6 +102,8 @@ def check_skill(skill_dir: Path) -> List[str]:
     for name in sorted(shipped):
         path = scripts_dir / name
         src = path.read_text(encoding="utf-8")
+        if AUTHOR not in src[:2000]:
+            problems.append(f"scripts/{name} header must credit the author (@{AUTHOR})")
         if not src.startswith("#!"):
             problems.append(f"scripts/{name} lacks a shebang")
         if not os.access(path, os.X_OK):

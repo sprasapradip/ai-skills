@@ -10,6 +10,8 @@ description: >-
   or "one-page website", or wants an existing landing page audited or upgraded.
 version: 2.0.0
 tier: premium
+author: Pradip Subedi (@sprasapradip)
+homepage: https://github.com/sprasapradip/ai-skills
 ---
 
 # Landing Page Builder (Premium)

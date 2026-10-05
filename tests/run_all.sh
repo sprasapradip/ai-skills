@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+# Author: Pradip Subedi (@sprasapradip) - https://github.com/sprasapradip/ai-skills
 # End-to-end self-test for every skill script against known-good and known-bad fixtures.
 # Each case asserts an exact exit code. Usage: sh tests/run_all.sh
 set -u
@@ -26,6 +27,10 @@ PD="$ROOT/pdf-maker/scripts"
 SC="$ROOT/social-card-generator/scripts"
 CC="$ROOT/code-cleaner/scripts"
 TH="$ROOT/text-humanizer/scripts"
+SB="$ROOT/seo-blog-writer/scripts"
+RG="$ROOT/readme-generator/scripts"
+EM="$ROOT/email-template-builder/scripts"
+RB="$ROOT/resume-builder/scripts"
 
 echo "== repository"
 expect 0 "all SKILL.md manifests valid"            $PY "$ROOT/scripts/validate_skills.py" "$ROOT"
@@ -79,6 +84,37 @@ expect 1 "AI draft exceeds gate"                    $PY "$TH/ai_tells.py" scan "
 expect 0 "human rewrite under gate"                 $PY "$TH/ai_tells.py" scan "$FX/human_rewrite.txt" --max-score 20
 expect 0 "faithful rewrite preserves facts"         $PY "$TH/ai_tells.py" compare "$FX/ai_draft.txt" "$FX/human_rewrite.txt"
 expect 1 "unfaithful rewrite caught"                $PY "$TH/ai_tells.py" compare "$FX/ai_draft.txt" "$FX/bad_rewrite.txt"
+
+printf 'We do it in order to ship. I hope this helps!\nNeedless to say, it works due to the fact that we utilize caching.\n' > "$OUT/tells.txt"
+expect 1 "suggest reports tells"                    $PY "$TH/ai_tells.py" suggest "$OUT/tells.txt" --fix "$OUT/tells.fixed.txt"
+expect 0 "safe fix output is clean"                 $PY "$TH/ai_tells.py" suggest "$OUT/tells.fixed.txt"
+expect 0 "safe fix keeps facts"                     $PY "$TH/ai_tells.py" compare "$OUT/tells.txt" "$OUT/tells.fixed.txt" --max-length-delta 100
+
+echo "== seo-blog-writer"
+expect 0 "good article passes enterprise SEO gate"  $PY "$SB/seo_check.py" "$FX/article.md" --tier enterprise --min-words 300 --faq-jsonld "$OUT/faq.json"
+expect 0 "FAQ JSON-LD is valid JSON"                $PY -m json.tool "$OUT/faq.json"
+expect 1 "stuffed article fails"                    $PY "$SB/seo_check.py" "$FX/article_bad.md" --tier starter
+expect 0 "article passes humanizer gate"            $PY "$SB/ai_tells.py" scan "$FX/article.md" --max-score 15
+
+echo "== readme-generator"
+expect 0 "README passes pro lint"                   $PY "$RG/readme_lint.py" "$FX/readme_repo/README.md" --tier pro
+printf '## Intro\n\n```\nls\n```\n[x](#nope) ![](missing.png)\n' > "$OUT/BAD.md"
+expect 1 "broken README fails"                      $PY "$RG/readme_lint.py" "$OUT/BAD.md" --tier starter
+cp "$FX/readme_repo/README.md" "$OUT/README.md"; mkdir -p "$OUT/docs"; cp "$FX/readme_repo/docs/guide.md" "$OUT/docs/"
+expect 0 "TOC written"                              $PY "$RG/readme_lint.py" "$OUT/README.md" --write-toc
+expect 0 "README with TOC still passes"             $PY "$RG/readme_lint.py" "$OUT/README.md" --tier pro
+
+echo "== email-template-builder"
+expect 0 "good marketing email passes"              $PY "$EM/email_lint.py" "$FX/email_good.html" --type marketing --allow-vars
+expect 1 "merge tags rejected without --allow-vars" $PY "$EM/email_lint.py" "$FX/email_good.html" --type marketing
+expect 1 "broken email fails"                       $PY "$EM/email_lint.py" "$FX/email_bad.html" --type marketing
+
+echo "== resume-builder"
+expect 0 "resume passes ATS gate"                   $PY "$RB/ats_check.py" "$FX/resume.md" --job "$FX/job.txt" --pages 1
+printf '# Me\n\n## Work\n\n- Responsible for various tasks\n\n| a | b |\n|---|---|\n' > "$OUT/badresume.md"
+expect 1 "weak resume fails"                        $PY "$RB/ats_check.py" "$OUT/badresume.md"
+expect 0 "resume renders to PDF"                    $PY "$PD/md_to_pdf.py" "$FX/resume.md" -o "$OUT/resume.pdf" --base-size 10
+expect 0 "resume PDF verifies"                      $PY "$PD/verify_pdf.py" "$OUT/resume.pdf" --require-title --min-pages 1
 
 echo
 echo "$pass passed, $fail failed"

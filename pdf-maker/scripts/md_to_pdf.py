@@ -16,6 +16,8 @@ Usage:
                  [--page-size a4|letter] [--base-size 10.5] [--strict]
 
 Exit codes: 0 = written, 1 = written with --strict violations (file removed), 2 = usage/IO error.
+
+Author: Pradip Subedi (@sprasapradip) - https://github.com/sprasapradip/ai-skills
 """
 from __future__ import annotations
 

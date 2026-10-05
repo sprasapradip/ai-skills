@@ -10,6 +10,8 @@ description: >-
   "blog post thumbnail", or "og:image for my site".
 version: 2.0.0
 tier: premium
+author: Pradip Subedi (@sprasapradip)
+homepage: https://github.com/sprasapradip/ai-skills
 ---
 
 # Social Card Generator (Premium)

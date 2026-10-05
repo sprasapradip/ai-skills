@@ -12,6 +12,8 @@ Usage:
                         [--normalize out.json] [--json]
 
 Exit codes: 0 = valid, 1 = schema errors, 2 = usage / IO error.
+
+Author: Pradip Subedi (@sprasapradip) - https://github.com/sprasapradip/ai-skills
 """
 from __future__ import annotations
 

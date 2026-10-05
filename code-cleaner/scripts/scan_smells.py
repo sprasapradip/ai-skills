@@ -14,6 +14,8 @@ Usage:
     scan_smells.py --compare BEFORE AFTER [--lang ...]   # regression gate for a refactor
 
 Exit codes: 0 = clean (per --fail-on), 1 = findings at/above threshold or regression, 2 = usage/IO error.
+
+Author: Pradip Subedi (@sprasapradip) - https://github.com/sprasapradip/ai-skills
 """
 from __future__ import annotations
 

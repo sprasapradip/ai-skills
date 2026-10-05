@@ -10,6 +10,8 @@ Usage:
     audit_html.py --contrast FG BG
 
 Exit codes: 0 = pass, 1 = gate failed, 2 = usage / IO error.
+
+Author: Pradip Subedi (@sprasapradip) - https://github.com/sprasapradip/ai-skills
 """
 from __future__ import annotations
 

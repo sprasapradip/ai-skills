@@ -8,8 +8,10 @@ description: >-
   scanner that scores AI tells and diffs facts. Use when the user says "humanize this text",
   "make this sound written by a human", "remove AI tone from this article", "rewrite this so it
   doesn't sound like ChatGPT", "make this less robotic", or "edit this to sound natural".
-version: 2.0.0
+version: 2.1.0
 tier: premium
+author: Pradip Subedi (@sprasapradip)
+homepage: https://github.com/sprasapradip/ai-skills
 ---
 
 # Text Humanizer (Premium)
@@ -56,7 +58,9 @@ client work gets Enterprise. State the tier in one line.
 
 ### 3.2 Pre-flight steps
 
-1. Run `python3 scripts/ai_tells.py scan draft.txt` to baseline the score and find hot spots.
+1. Run `python3 scripts/ai_tells.py scan draft.txt` to baseline the score and readability, then
+   `python3 scripts/ai_tells.py suggest draft.txt` to get every tell by line:column with
+   replacement options.
 2. Build the **protected set**: numbers, dates, money, percentages, URLs, emails, @handles, quotes,
    code spans, product and proper names, legal or medical claims, and the user's `keep_terms`.
    None of these may change.
@@ -85,7 +89,9 @@ client work gets Enterprise. State the tier in one line.
 negative parallelisms ("not just X, but Y"), rule-of-three lists, em-dash overuse, repeated
 openers, uniform sentence length.
 
-**Phase 2: Strip.** Delete throat-clearing ("In today's fast-paced world", "It's important to
+**Phase 2: Strip.** Run `ai_tells.py suggest draft.txt --fix draft.safe.txt` to apply only the
+deterministic swaps ("in order to" → "to", "utilize" → "use", sign-off lines removed), then
+delete the remaining throat-clearing by hand: ("In today's fast-paced world", "It's important to
 note"), sign-offs ("I hope this helps"), and redundant summaries ("In conclusion…").
 
 **Phase 3: Make it concrete.** Replace abstractions with the specific noun or verb already present
@@ -113,7 +119,7 @@ Fix and repeat until both pass.
   HTML), with no preamble.
 - Then a compact **Changes** list (3–7 bullets) naming the pattern removed and an example
   (`"leverage" → "use"; cut 4 transition openers; split 2 run-on sentences`).
-- Pro+ adds a score line: `AI-tell score 76.5 → 6.0 · rhythm CV 0.39 → 0.58 · facts preserved ✓ · length −32%`.
+- Pro+ adds a score line: `AI-tell score 76.5 → 6.0 · rhythm CV 0.39 → 0.58 · Flesch 48 → 71 · facts preserved ✓ · length −32%`.
 - Enterprise batch adds a table: `| Document | Score before → after | Facts | Length Δ | Status |`.
 - Typography: keep the user's quote style and locale spelling. Use a single space after periods
   and no double hyphens.
@@ -124,7 +130,8 @@ Fix and repeat until both pass.
 
 | Script | Purpose | Usage |
 |---|---|---|
-| `scripts/ai_tells.py scan` | Scores AI tells 0–100: stock vocabulary, transition openers, filler, closers, negative parallelism, triads, em-dash density, sentence-length uniformity; lists every hit | `python3 scripts/ai_tells.py scan draft.txt [--max-score 20] [--json]` (`-` reads stdin) |
+| `scripts/ai_tells.py scan` | Scores AI tells 0–100 and reports Flesch reading ease: stock vocabulary, transition openers, filler, closers, negative parallelism, triads, em-dash density, sentence-length uniformity; lists every hit | `python3 scripts/ai_tells.py scan draft.txt [--max-score 20] [--json]` (`-` reads stdin) |
+| `scripts/ai_tells.py suggest` | Lists every tell with `line:col`, category and concrete replacement options; `--fix OUT` writes a draft with only meaning-safe mechanical swaps applied (never stylistic rewrites) | `python3 scripts/ai_tells.py suggest draft.txt [--fix draft.safe.txt] [--json]` |
 | `scripts/ai_tells.py compare` | Fact-preservation gate: numbers, dates, URLs, emails, handles, quotes, code spans must survive; flags invented numbers/URLs/dates and lost proper nouns; reports length Δ and score change | `python3 scripts/ai_tells.py compare draft.txt rewrite.txt [--max-length-delta 50] [--json]` |
 
 Exit codes: `0` pass, `1` gate failed, `2` usage/IO error. The score is a heuristic for
