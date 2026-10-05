@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ledgerly — Invoicing for Small Teams</title>
+<meta name="description" content="Ledgerly sends invoices, chases late payments and reconciles your bank feed so small teams get paid faster.">
+<meta name="theme-color" content="#0f172a">
+<link rel="canonical" href="https://ledgerly.app/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%232563eb'/%3E%3C/svg%3E">
+<meta property="og:title" content="Ledgerly — Invoicing for Small Teams">
+<meta property="og:description" content="Send invoices, chase late payments and reconcile automatically.">
+<meta property="og:image" content="https://ledgerly.app/og.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ledgerly.app/">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Ledgerly","applicationCategory":"BusinessApplication","offers":{"@type":"Offer","price":"19","priceCurrency":"USD"}}</script>
+<style>
+:root{--color-bg:#ffffff;--color-surface:#f1f5f9;--color-text:#0f172a;--color-text-muted:#475569;--color-primary:#2563eb;--color-on-primary:#ffffff;--color-focus:#1d4ed8;--space:clamp(1rem,2vw,2rem);--fs-h1:clamp(2rem,1.4rem + 3vw,3.5rem)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--color-bg:#0b1120;--color-surface:#111827;--color-text:#e2e8f0;--color-text-muted:#94a3b8;--color-primary:#60a5fa;--color-on-primary:#0b1120;--color-focus:#93c5fd}}
+:root[data-theme="dark"]{--color-bg:#0b1120;--color-surface:#111827;--color-text:#e2e8f0;--color-text-muted:#94a3b8;--color-primary:#60a5fa;--color-on-primary:#0b1120;--color-focus:#93c5fd}
+body{margin:0;background:var(--color-bg);color:var(--color-text);font:1rem/1.6 system-ui,sans-serif}
+h1{font-size:var(--fs-h1)}
+:focus-visible{outline:3px solid var(--color-focus);outline-offset:2px}
+.skip{position:absolute;left:-999px}.skip:focus{left:1rem}
+a.btn{transition:transform .2s}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (min-width:48rem){.grid{display:grid;grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header><nav aria-label="Primary"><a href="#features">Features</a> <button type="button" id="theme" aria-label="Toggle dark mode">◐</button></nav></header>
+<main id="main">
+<h1>Get paid faster</h1>
+<section id="features" class="grid"><h2>Features</h2><p>Automatic reminders.</p></section>
+<form action="/subscribe" method="post"><label for="email">Work email</label><input id="email" type="email" name="email" required autocomplete="email"><button type="submit">Start free trial</button></form>
+<img src="hero.webp" alt="Dashboard showing paid invoices" width="800" height="450">
+</main>
+<footer><p>© 2026 Ledgerly</p></footer>
+<script>
+const b=document.getElementById('theme');b.addEventListener('click',()=>{const r=document.documentElement;r.dataset.theme=r.dataset.theme==='dark'?'light':'dark';});
+</script>
+</body>
+</html>

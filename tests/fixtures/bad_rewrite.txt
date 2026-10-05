@@ -1,0 +1,1 @@
+Acme cut support tickets by 45% after switching systems. It plugs into Slack and GitHub. Read more at https://acme.example/blog.

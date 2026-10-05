@@ -1,0 +1,1 @@
+Acme Corp cut support tickets by 38% after switching the new system on March 4, 2025. That number surprised them. The platform hooks into Slack, Jira and GitHub, so nobody had to change how they work. Want the details? The full study is at https://acme.example/report.

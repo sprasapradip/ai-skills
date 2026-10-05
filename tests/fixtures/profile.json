@@ -1,0 +1,19 @@
+{
+  "name": "Asha Rai",
+  "role": "Full-Stack Laravel & WordPress Engineer",
+  "tagline": "I build ERP systems, plugins and AI automations that ship.",
+  "summary": "Electrical engineer turned software developer building production Laravel ERPs, WordPress plugins, PWAs and AI-powered tooling for teams in Nepal and abroad.",
+  "location": "Kathmandu, Nepal",
+  "contact": {"email": "asha@asharai.example", "phone": "+977 9800000000"},
+  "links": [{"label": "GitHub", "url": "https://github.com/asharai-dev"}],
+  "skills": {"Languages": ["PHP", "JavaScript", "Python", "php"], "Frameworks": ["Laravel", "WordPress"]},
+  "projects": [
+    {"name": "AI Skills", "summary": "Premium agent skills with zero-dependency validators.", "tech": ["Python"], "repo": "https://github.com/sprasapradip/ai-skills", "metrics": ["6 skills"]},
+    {"name": "School ERP", "summary": "Multi-tenant Laravel ERP for schools.", "tech": ["Laravel", "MySQL"], "demo": "https://erp.asharai.example", "metrics": ["40 schools"]}
+  ],
+  "experience": [
+    {"company": "Freelance", "role": "Lead Developer", "start": "2021-03", "end": null, "highlights": ["Delivered 30+ projects"]},
+    {"company": "Studio", "role": "Developer", "start": "2019-01", "end": "2021-02", "highlights": ["Built plugins"]}
+  ],
+  "seo": {"site_url": "https://asharai.example", "og_image": "https://asharai.example/og.png"}
+}
